@@ -197,3 +197,42 @@ cookie?.querySelectorAll("[data-cookie-accept]").forEach((button) => button.addE
   cookie.hidden = true;
   loadMetrika();
 }));
+
+const reviewsSlider = document.querySelector("[data-slider]");
+if (reviewsSlider) {
+  const track = reviewsSlider.querySelector("[data-slider-track]");
+  const slides = [...track.children];
+  const previousButton = reviewsSlider.querySelector("[data-slider-prev]");
+  const nextButton = reviewsSlider.querySelector("[data-slider-next]");
+  const progress = reviewsSlider.querySelector("[data-slider-progress]");
+  const count = reviewsSlider.querySelector("[data-slider-count]");
+  let currentSlide = 0;
+  let touchStartX = 0;
+
+  const renderSlider = () => {
+    track.style.transform = `translate3d(${-currentSlide * 100}%, 0, 0)`;
+    progress.style.transform = `scaleX(${(currentSlide + 1) / slides.length})`;
+    count.textContent = `${String(currentSlide + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+  };
+
+  const goToSlide = (index) => {
+    currentSlide = (index + slides.length) % slides.length;
+    renderSlider();
+  };
+
+  previousButton.addEventListener("click", () => goToSlide(currentSlide - 1));
+  nextButton.addEventListener("click", () => goToSlide(currentSlide + 1));
+  reviewsSlider.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") goToSlide(currentSlide - 1);
+    if (event.key === "ArrowRight") goToSlide(currentSlide + 1);
+  });
+  reviewsSlider.addEventListener("touchstart", (event) => {
+    touchStartX = event.touches[0].clientX;
+  }, { passive: true });
+  reviewsSlider.addEventListener("touchend", (event) => {
+    const distance = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(distance) >= 48) goToSlide(currentSlide + (distance < 0 ? 1 : -1));
+  }, { passive: true });
+
+  renderSlider();
+}
