@@ -553,3 +553,19 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
 .button:hover>span:last-child{transform:translate(3px,-3px)}
 .button svg.arrow-icon{display:block;flex:0 0 22px;width:22px;height:22px;overflow:visible;background:none;-webkit-mask:none;mask:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:square;stroke-linejoin:miter}
 .button:hover svg.arrow-icon{transform:translate(3px,-3px)}
+
+/* Tighter mobile section rhythm */
+@media (max-width: 600px) {
+  .hero,
+  .hero__inner {
+    min-height: 620px;
+  }
+
+  .chapter {
+    padding-block: 84px;
+  }
+
+  .solo {
+    padding-top: 56px;
+  }
+}
