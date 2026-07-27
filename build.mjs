@@ -16,16 +16,23 @@ await cp(new URL("./public/vendor", import.meta.url), new URL("./dist/vendor", i
 const sourceHtml = await readFile(new URL("./index.html", import.meta.url), "utf8");
 const reviewsHtml = await readFile(new URL("./src/com-reviews.html", import.meta.url), "utf8");
 const emptyReviewsPattern = /<section class="chapter chapter--paper reviews">[\s\S]*?<\/section>/;
+const mainWidget = '<script id="9a2fe2c17b5ddf2676e1a2dc52657252d39571ea" src="https://agkedu.getcourse.ru/pl/lite/widget/script?id=1635593"></script>';
+const commercialWidget = '<script id="2c719ff488264ed214ed447da91dfd550af62651" src="https://agkedu.getcourse.ru/pl/lite/widget/script?id=1635595"></script>';
 
 if (!emptyReviewsPattern.test(sourceHtml)) {
   throw new Error("Could not find the reviews placeholder in index.html");
 }
+if (!sourceHtml.includes(mainWidget)) {
+  throw new Error("Could not find the main GetCourse widget in index.html");
+}
 
 const commercialHtml = sourceHtml
   .replace("/public/alexandra-hero-cutout.png", "/public/153.png")
-  .replace(emptyReviewsPattern, reviewsHtml.trim());
+  .replace(emptyReviewsPattern, reviewsHtml.trim())
+  .replace(mainWidget, commercialWidget);
 
 await mkdir(new URL("./dist/com-version/", import.meta.url), { recursive: true });
 await writeFile(new URL("./dist/com-version/index.html", import.meta.url), commercialHtml);
+await writeFile(new URL("./dist/index.html", import.meta.url), commercialHtml);
 
 console.log("Static site built in dist/");
