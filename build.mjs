@@ -32,6 +32,7 @@ if (!sourceHtml.includes(mainAnalytics)) {
 }
 
 const commercialHtml = sourceHtml
+  .replace("<body>", '<body class="is-commercial">')
   .replace("/public/alexandra-hero-cutout.png", "/public/153.png")
   .replace(emptyReviewsPattern, reviewsHtml.trim())
   .replace(mainWidget, commercialWidget)

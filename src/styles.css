@@ -949,3 +949,95 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
     transition-duration: 1ms;
   }
 }
+
+/* COM hero: the portrait behaves as an atmospheric background, not a framed image. */
+.is-commercial .hero__portrait {
+  right: 2%;
+  bottom: 0;
+  width: 40%;
+  height: 86%;
+  pointer-events: none;
+}
+
+.is-commercial .hero__portrait img {
+  filter: saturate(.92) brightness(.9) drop-shadow(0 32px 50px rgba(0, 0, 0, .24));
+  -webkit-mask-image: radial-gradient(ellipse 84% 88% at 52% 49%, #000 52%, transparent 100%);
+  mask-image: radial-gradient(ellipse 84% 88% at 52% 49%, #000 52%, transparent 100%);
+}
+
+.is-commercial .hero__portrait-line {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .is-commercial .hero,
+  .is-commercial .hero__inner {
+    min-height: 0;
+  }
+
+  .is-commercial .hero__inner {
+    display: block;
+    padding-top: 92px;
+    padding-bottom: 34px;
+  }
+
+  .is-commercial .hero__portrait {
+    top: 82px;
+    right: -3%;
+    bottom: auto;
+    width: 66%;
+    height: 310px;
+  }
+
+  .is-commercial .hero__portrait img {
+    object-fit: contain;
+    object-position: center top;
+    -webkit-mask-image: radial-gradient(ellipse 88% 82% at 54% 43%, #000 50%, transparent 100%);
+    mask-image: radial-gradient(ellipse 88% 82% at 54% 43%, #000 50%, transparent 100%);
+  }
+
+  .is-commercial .hero__copy {
+    width: 100%;
+    padding-top: 320px;
+  }
+
+  .is-commercial .hero h1,
+  .is-commercial .hero__copy > p {
+    max-width: 100%;
+  }
+
+  .is-commercial .hero__copy .button {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .is-commercial .hero__inner {
+    padding-top: 82px;
+    padding-bottom: 24px;
+  }
+
+  .is-commercial .hero__portrait {
+    top: 72px;
+    right: -8%;
+    width: 72%;
+    height: 290px;
+  }
+
+  .is-commercial .hero__copy {
+    padding-top: 300px;
+  }
+
+  .is-commercial .hero__copy > p {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .is-commercial .hero__format {
+    font-size: 12px !important;
+  }
+}
