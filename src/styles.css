@@ -693,3 +693,40 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
     --leading-body: 1.6;
   }
 }
+
+/* Surface contrast and aligned comparison rows */
+.chapter--gold p:not(.block-label),
+.chapter--gold h3,
+.audience__orbit p {
+  color: var(--ink);
+}
+
+.relevance .block-label {
+  margin-bottom: 22px;
+  color: var(--text-primary);
+  font-family: Manrope, Arial, sans-serif;
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.changes__rail h3 {
+  min-height: 5.4em;
+  margin-bottom: 24px;
+}
+
+.changes__rail p {
+  margin: 0;
+}
+
+.solo__result {
+  color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .changes__rail h3 {
+    min-height: 0;
+  }
+}
