@@ -952,11 +952,11 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
 
 /* COM hero: the portrait behaves as an atmospheric background, not a framed image. */
 .is-commercial .hero__portrait {
-  top: 16%;
+  top: 14%;
   right: 5%;
   bottom: auto;
-  width: 30%;
-  height: 68%;
+  width: 33%;
+  height: 72%;
   pointer-events: none;
 }
 
