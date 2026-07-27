@@ -569,3 +569,127 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
     padding-top: 56px;
   }
 }
+
+/* Strict site-wide typography roles */
+:root {
+  --type-section: 56px;
+  --type-subhead: 28px;
+  --type-body: 18px;
+  --type-label: 11px;
+  --leading-section: 1.1;
+  --leading-subhead: 1.35;
+  --leading-body: 1.65;
+}
+
+.chapter h2,
+.solo__era h2,
+.connection__title h2,
+.direction h2,
+.changes h2,
+.program__title h2,
+.relevance h2,
+.audience h2,
+.author__name h2,
+.reviews h2,
+.final-screen h2,
+.care h2 {
+  color: inherit;
+  font-family: var(--display);
+  font-size: var(--type-section);
+  font-weight: 400;
+  line-height: var(--leading-section);
+  letter-spacing: -.025em;
+}
+
+.solo__reason p,
+.solo__reason--because p,
+.solo__result,
+.connection__title > p:not(.block-label),
+.direction__group p,
+.direction__end p,
+.changes__rail h3,
+.program__list h3,
+.audience__final,
+.registration__question p,
+.registration__question:nth-child(2) p,
+.registration__conclusion,
+.registration__widget-head p,
+.final-screen__invite {
+  color: inherit;
+  font-family: var(--display);
+  font-size: var(--type-subhead) !important;
+  font-weight: 400;
+  line-height: var(--leading-subhead) !important;
+  letter-spacing: -.018em;
+}
+
+.solo__intro,
+.connection__stream p,
+.changes__rail p,
+.program__list p,
+.relevance__past,
+.relevance__copy p,
+.audience__orbit p,
+.author__facts p,
+.care__lead {
+  color: var(--text-secondary);
+  font-family: Manrope, Arial, sans-serif;
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  letter-spacing: 0;
+}
+
+.block-label,
+.solo__era > span,
+.solo__reason > span,
+.connection__stream > article > span,
+.changes__rail b,
+.audience__orbit span,
+.registration__question > span,
+.registration__widget-head > span,
+.author__name > p,
+.footer h3 {
+  font-family: Manrope, Arial, sans-serif;
+  font-size: var(--type-label);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: .12em;
+}
+
+.chapter--ink h2,
+.chapter--paper h2,
+.final-screen h2,
+.care h2 {
+  color: var(--text-primary);
+}
+
+.chapter--gold h2 {
+  color: var(--ink);
+}
+
+.registration__question p,
+.registration__question:nth-child(2) p {
+  max-width: 640px;
+  color: var(--text-primary);
+}
+
+.registration__conclusion {
+  color: var(--gold);
+}
+
+.direction__group--muted {
+  opacity: .68;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --type-section: 32px;
+    --type-subhead: 21px;
+    --type-body: 16px;
+    --type-label: 10px;
+    --leading-section: 1.16;
+    --leading-subhead: 1.4;
+    --leading-body: 1.6;
+  }
+}
