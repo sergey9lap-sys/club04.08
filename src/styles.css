@@ -119,6 +119,177 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
 .button:hover .arrow-icon{transform:translate(3px,-3px)}
 @media(max-width:600px){.hero__copy{padding-top:115px}.hero__portrait{bottom:198px}.hero__copy .button{top:540px}}
 
+/* Before / after — the growth factor has visibly changed */
+.solo__headline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px minmax(0, 1fr);
+  align-items: stretch;
+  margin-top: clamp(40px, 5vw, 72px);
+  border-block: 1px solid var(--forest-line);
+}
+
+.solo__era {
+  min-width: 0;
+  padding-block: clamp(30px, 4vw, 52px);
+}
+
+.solo__era--before {
+  padding-right: clamp(24px, 4vw, 60px);
+}
+
+.solo__era--after {
+  padding-left: clamp(24px, 4vw, 60px);
+  background: rgb(255 255 255 / 2%);
+}
+
+.solo__era > span {
+  display: block;
+  color: var(--gold);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.solo__era h2 {
+  max-width: 560px;
+  margin: 24px 0 0;
+  font-size: clamp(36px, 3.5vw, 56px);
+  line-height: 1.08;
+}
+
+.solo__era--before h2 {
+  color: var(--muted);
+}
+
+.solo__era-arrow {
+  display: grid;
+  place-items: center;
+}
+
+.solo__era-arrow svg {
+  width: 82px;
+  overflow: visible;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 700px) {
+  .solo__headline {
+    grid-template-columns: 1fr;
+    margin-top: 36px;
+  }
+
+  .solo__era {
+    padding: 26px 0;
+  }
+
+  .solo__era--before {
+    padding-right: 0;
+  }
+
+  .solo__era--after {
+    padding: 26px 20px;
+  }
+
+  .solo__era h2 {
+    margin-top: 16px;
+    font-size: 30px;
+    line-height: 1.14;
+  }
+
+  .solo__era-arrow {
+    height: 54px;
+  }
+
+  .solo__era-arrow svg {
+    width: 78px;
+    transform: rotate(90deg);
+  }
+}
+
+/* Final mobile type scale and hero composition */
+@media (max-width: 600px) {
+  .chapter h2,
+  .connection__title h2,
+  .program__title h2,
+  .direction h2,
+  .relevance h2,
+  .audience h2,
+  .registration__copy h2,
+  .final-screen h2,
+  .care h2 {
+    font-size: 32px;
+    line-height: 1.16;
+    letter-spacing: -.025em;
+  }
+
+  .chapter h3,
+  .changes__rail h3,
+  .direction__group h3,
+  .program__list h3 {
+    font-size: 21px;
+    line-height: 1.28;
+  }
+
+  .block-label {
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: .12em;
+  }
+
+  .solo__reason p,
+  .solo__reason--because p {
+    font-size: 23px;
+    line-height: 1.24;
+  }
+
+  .solo__result {
+    font-size: 27px;
+    line-height: 1.2;
+  }
+
+  .connection__title > p,
+  .audience__final,
+  .registration__conclusion {
+    font-size: 21px;
+    line-height: 1.3;
+  }
+
+  .registration__question p,
+  .registration__question:nth-child(2) p {
+    font-size: 23px;
+    line-height: 1.25;
+  }
+
+  .author__name h2 {
+    font-size: 34px;
+    line-height: 1.08;
+  }
+
+  .reviews h2 {
+    font-size: 42px;
+    line-height: 1;
+  }
+
+  .hero__copy {
+    padding-top: 62px;
+  }
+
+  .hero__portrait {
+    bottom: 250px;
+  }
+
+  .hero__copy .button {
+    top: 482px;
+  }
+}
+
 /* Single-shape arrow: immune to iOS emoji substitution */
 .button>span:last-child{position:relative;display:block;flex:0 0 22px;width:22px;height:22px;font-size:0;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19 19 5M9 5h10v10' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E") center/22px 22px no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19 19 5M9 5h10v10' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E") center/22px 22px no-repeat}
 .button>span:last-child:before,.button>span:last-child:after{display:none}

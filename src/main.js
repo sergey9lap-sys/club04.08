@@ -55,6 +55,19 @@ if (!reduced && gsap && ScrollTrigger) {
   };
   revealHeading(".chapter h2, .final-screen h2, .care h2");
 
+  gsap.from(".solo__era--before", {
+    x: -35, opacity: 0, duration: .85, ease: "power3.out",
+    scrollTrigger: { trigger: ".solo__headline", start: "top 78%", once: true }
+  });
+  gsap.from(".solo__era-arrow path", {
+    strokeDasharray: 180, strokeDashoffset: 180, duration: .9, ease: "power2.inOut",
+    scrollTrigger: { trigger: ".solo__headline", start: "top 72%", once: true }
+  });
+  gsap.from(".solo__era--after", {
+    x: 35, opacity: 0, duration: .85, delay: .18, ease: "power3.out",
+    scrollTrigger: { trigger: ".solo__headline", start: "top 72%", once: true }
+  });
+
   gsap.from(".solo__intro", {
     y: 30, opacity: 0, duration: .85, ease: "power3.out",
     scrollTrigger: { trigger: ".solo__story", start: "top 78%", once: true }
