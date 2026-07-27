@@ -181,21 +181,55 @@ if (!reduced && gsap && ScrollTrigger) {
 
 const cookie = document.querySelector("[data-cookie]");
 const consentKey = "pack-cookie-consent";
+const analytics = window.siteAnalytics || {};
 const loadMetrika = () => {
-  if (window.ym) return;
+  const counterId = analytics.yandexId;
+  if (!counterId || window.__siteMetrikaLoaded) return;
+  window.__siteMetrikaLoaded = true;
   window.ym = function(){(window.ym.a=window.ym.a||[]).push(arguments)};
   window.ym.l = Date.now();
   const script = document.createElement("script");
   script.async = true;
-  script.src = "https://mc.yandex.ru/metrika/tag.js?id=110484880";
+  script.src = `https://mc.yandex.ru/metrika/tag.js?id=${counterId}`;
   document.head.append(script);
-  window.ym(110484880, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+  window.ym(counterId, "init", {
+    ssr: true,
+    webvisor: true,
+    clickmap: true,
+    ecommerce: "dataLayer",
+    referrer: document.referrer,
+    url: location.href,
+    accurateTrackBounce: true,
+    trackLinks: true
+  });
 };
-if (localStorage.getItem(consentKey) === "accepted") loadMetrika(); else cookie.hidden = false;
+const loadMetaPixel = () => {
+  const pixelId = analytics.metaPixelId;
+  if (!pixelId || window.fbq) return;
+  const fbq = window.fbq = function() {
+    fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+  };
+  if (!window._fbq) window._fbq = fbq;
+  fbq.push = fbq;
+  fbq.loaded = true;
+  fbq.version = "2.0";
+  fbq.queue = [];
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://connect.facebook.net/en_US/fbevents.js";
+  document.head.append(script);
+  fbq("init", pixelId);
+  fbq("track", "PageView");
+};
+const loadAnalytics = () => {
+  loadMetrika();
+  loadMetaPixel();
+};
+if (localStorage.getItem(consentKey) === "accepted") loadAnalytics(); else cookie.hidden = false;
 cookie?.querySelectorAll("[data-cookie-accept]").forEach((button) => button.addEventListener("click", () => {
   localStorage.setItem(consentKey, "accepted");
   cookie.hidden = true;
-  loadMetrika();
+  loadAnalytics();
 }));
 
 const reviewsSlider = document.querySelector("[data-slider]");

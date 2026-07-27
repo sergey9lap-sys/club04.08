@@ -18,6 +18,8 @@ const reviewsHtml = await readFile(new URL("./src/com-reviews.html", import.meta
 const emptyReviewsPattern = /<section class="chapter chapter--paper reviews">[\s\S]*?<\/section>/;
 const mainWidget = '<script id="9a2fe2c17b5ddf2676e1a2dc52657252d39571ea" src="https://agkedu.getcourse.ru/pl/lite/widget/script?id=1635593"></script>';
 const commercialWidget = '<script id="2c719ff488264ed214ed447da91dfd550af62651" src="https://agkedu.getcourse.ru/pl/lite/widget/script?id=1635595"></script>';
+const mainAnalytics = '<script>window.siteAnalytics={yandexId:110484880,metaPixelId:null};</script>';
+const commercialAnalytics = '<script>window.siteAnalytics={yandexId:110484887,metaPixelId:"1923709794923109"};</script>';
 
 if (!emptyReviewsPattern.test(sourceHtml)) {
   throw new Error("Could not find the reviews placeholder in index.html");
@@ -25,11 +27,15 @@ if (!emptyReviewsPattern.test(sourceHtml)) {
 if (!sourceHtml.includes(mainWidget)) {
   throw new Error("Could not find the main GetCourse widget in index.html");
 }
+if (!sourceHtml.includes(mainAnalytics)) {
+  throw new Error("Could not find the main analytics configuration in index.html");
+}
 
 const commercialHtml = sourceHtml
   .replace("/public/alexandra-hero-cutout.png", "/public/153.png")
   .replace(emptyReviewsPattern, reviewsHtml.trim())
-  .replace(mainWidget, commercialWidget);
+  .replace(mainWidget, commercialWidget)
+  .replace(mainAnalytics, commercialAnalytics);
 
 await mkdir(new URL("./dist/com-version/", import.meta.url), { recursive: true });
 await writeFile(new URL("./dist/com-version/index.html", import.meta.url), commercialHtml);
