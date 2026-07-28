@@ -179,15 +179,6 @@ if (!reduced && gsap && ScrollTrigger) {
   });
 }
 
-const cookie = document.querySelector("[data-cookie]");
-const consentKey = "pack-cookie-consent";
-if (localStorage.getItem(consentKey) !== "accepted" && cookie) cookie.hidden = false;
-cookie?.querySelectorAll("[data-cookie-accept]").forEach((button) => button.addEventListener("click", () => {
-  localStorage.setItem(consentKey, "accepted");
-  cookie.hidden = true;
-  window.loadSiteAnalytics?.();
-}));
-
 const reviewsSlider = document.querySelector("[data-slider]");
 if (reviewsSlider) {
   const track = reviewsSlider.querySelector("[data-slider-track]");

@@ -1079,3 +1079,91 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
     margin-top: 18px;
   }
 }
+
+/* One continuous argument instead of detached thesis cards. */
+.solo__story {
+  display: grid;
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+  margin-top: 42px;
+  border: 1px solid var(--forest-line);
+  background: rgba(255, 255, 255, .018);
+}
+
+.solo__intro {
+  grid-column: 1 / -1;
+  max-width: none;
+  margin: 0;
+  padding: 30px 36px;
+  border: 0;
+  border-bottom: 1px solid var(--forest-line);
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+.solo__reasoning {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+  border: 0;
+}
+
+.solo__reason,
+.solo__reason--because {
+  min-height: 250px;
+  padding: 34px 36px;
+  background: transparent;
+}
+
+.solo__reason:first-child {
+  border-right: 1px solid var(--forest-line);
+}
+
+.solo__reason p,
+.solo__reason--because p {
+  margin-top: 46px;
+}
+
+.solo__result {
+  grid-column: 1 / -1;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 30px 36px;
+  border-top: 1px solid var(--forest-line);
+  background: rgba(215, 170, 77, .08);
+  color: var(--gold);
+  font-size: var(--type-subhead) !important;
+  line-height: var(--leading-subhead) !important;
+}
+
+@media (max-width: 700px) {
+  .solo__story,
+  .solo__reasoning {
+    grid-template-columns: 1fr;
+  }
+
+  .solo__story {
+    margin-top: 30px;
+  }
+
+  .solo__intro,
+  .solo__reason,
+  .solo__reason--because,
+  .solo__result {
+    padding: 24px 20px;
+  }
+
+  .solo__reason,
+  .solo__reason--because {
+    min-height: 0;
+  }
+
+  .solo__reason:first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--forest-line);
+  }
+
+  .solo__reason p,
+  .solo__reason--because p {
+    margin-top: 24px;
+  }
+}
