@@ -21,6 +21,25 @@ const mainWidget = '<script id="9a2fe2c17b5ddf2676e1a2dc52657252d39571ea" src="h
 const commercialWidget = '<script id="2c719ff488264ed214ed447da91dfd550af62651" src="https://agkedu.getcourse.ru/pl/lite/widget/script?id=1635595"></script>';
 const mainAnalytics = 'window.siteAnalytics={yandexId:110484880,metaPixelId:null};';
 const commercialAnalytics = 'window.siteAnalytics={yandexId:110484887,metaPixelId:"1923709794923109"};';
+const commercialMetrikaOnly = 'window.siteAnalytics={yandexId:110484887,metaPixelId:null};';
+const metaPixelHead = `<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1923709794923109');
+fbq('track', 'PageView');
+</script>`;
+const metaPixelNoScript = `<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1923709794923109&ev=PageView&noscript=1"
+alt=""></noscript>`;
+const injectMetaPixel = (html) => html
+  .replace("</head>", `${metaPixelHead}\n</head>`)
+  .replace(/<body([^>]*)>/, `<body$1>\n${metaPixelNoScript}`);
 
 if (!emptyReviewsPattern.test(sourceHtml)) {
   throw new Error("Could not find the reviews placeholder in index.html");
@@ -32,12 +51,12 @@ if (!sourceHtml.includes(mainAnalytics)) {
   throw new Error("Could not find the main analytics configuration in index.html");
 }
 
-const commercialHtml = sourceHtml
+const commercialHtml = injectMetaPixel(sourceHtml
   .replace("<body>", '<body class="is-commercial">')
   .replace("/public/alexandra-hero-cutout.png", "/public/153.png")
   .replace(emptyReviewsPattern, reviewsHtml.trim())
   .replace(mainWidget, commercialWidget)
-  .replace(mainAnalytics, commercialAnalytics);
+  .replace(mainAnalytics, commercialAnalytics));
 
 await mkdir(new URL("./dist/com-version/", import.meta.url), { recursive: true });
 await writeFile(new URL("./dist/com-version/index.html", import.meta.url), commercialHtml);
@@ -49,9 +68,11 @@ if (isCommercialBuild) {
     if (!routeHtml.includes(mainAnalytics)) {
       throw new Error(`Could not find the main analytics configuration in ${route}/index.html`);
     }
+    const analyticsConfig = route === "thanks" ? commercialAnalytics : commercialMetrikaOnly;
+    const builtRouteHtml = routeHtml.replace(mainAnalytics, analyticsConfig);
     await writeFile(
       new URL(`./dist/${route}/index.html`, import.meta.url),
-      routeHtml.replace(mainAnalytics, commercialAnalytics)
+      route === "thanks" ? injectMetaPixel(builtRouteHtml) : builtRouteHtml
     );
   }
 }
