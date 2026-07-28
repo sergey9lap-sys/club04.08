@@ -224,6 +224,43 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
   }
 }
 
+/* MAIN mobile hero: keep the portrait beside the copy without covering it. */
+@media (max-width: 600px) {
+  body:not(.is-commercial) .hero,
+  body:not(.is-commercial) .hero__inner {
+    min-height: 620px;
+  }
+
+  body:not(.is-commercial) .hero__copy {
+    width: 100%;
+    padding-top: 62px;
+  }
+
+  body:not(.is-commercial) .hero h1 {
+    max-width: 68%;
+  }
+
+  body:not(.is-commercial) .hero__copy > p {
+    max-width: 52%;
+  }
+
+  body:not(.is-commercial) .hero__portrait {
+    top: 240px;
+    right: -22%;
+    bottom: auto;
+    width: 78%;
+    height: 500px;
+  }
+
+  body:not(.is-commercial) .hero__portrait img {
+    object-position: center top;
+  }
+
+  body:not(.is-commercial) .hero__copy .button {
+    top: 427px;
+  }
+}
+
 /* Final mobile type scale and hero composition */
 @media (max-width: 600px) {
   .chapter h2,
@@ -1165,5 +1202,58 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
   .solo__reason p,
   .solo__reason--because p {
     margin-top: 24px;
+  }
+}
+
+/* Definitive MAIN mobile hero composition. */
+@media (max-width: 600px) {
+  body:not(.is-commercial) .hero,
+  body:not(.is-commercial) .hero__inner {
+    min-height: 760px;
+  }
+
+  body:not(.is-commercial) .hero__inner {
+    padding-top: 92px;
+    padding-bottom: 28px;
+  }
+
+  body:not(.is-commercial) .hero__copy {
+    width: 100%;
+    padding-top: 78px;
+  }
+
+  body:not(.is-commercial) .hero h1 {
+    position: relative;
+    z-index: 2;
+    max-width: 58%;
+    margin-bottom: 28px;
+  }
+
+  body:not(.is-commercial) .hero__copy > p,
+  body:not(.is-commercial) .hero__format {
+    position: relative;
+    z-index: 2;
+    max-width: 50%;
+  }
+
+  body:not(.is-commercial) .hero__portrait {
+    top: 180px;
+    right: auto;
+    bottom: auto;
+    left: 57%;
+    width: 68%;
+    height: 470px;
+    align-items: flex-start;
+  }
+
+  body:not(.is-commercial) .hero__portrait img {
+    object-fit: contain;
+    object-position: center top;
+  }
+
+  body:not(.is-commercial) .hero__copy .button {
+    top: 545px;
+    left: 0;
+    width: 100%;
   }
 }
