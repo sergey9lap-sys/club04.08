@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "SITE_VARIANT=com npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true
 }

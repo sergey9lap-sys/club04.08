@@ -1,6 +1,7 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 
 const output = new URL("./dist/", import.meta.url);
+const isCommercialBuild = process.env.SITE_VARIANT === "com";
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 
@@ -40,6 +41,19 @@ const commercialHtml = sourceHtml
 
 await mkdir(new URL("./dist/com-version/", import.meta.url), { recursive: true });
 await writeFile(new URL("./dist/com-version/index.html", import.meta.url), commercialHtml);
-await writeFile(new URL("./dist/index.html", import.meta.url), commercialHtml);
 
-console.log("Static site built in dist/");
+if (isCommercialBuild) {
+  await writeFile(new URL("./dist/index.html", import.meta.url), commercialHtml);
+  for (const route of ["thanks", "spasibo"]) {
+    const routeHtml = await readFile(new URL(`./${route}/index.html`, import.meta.url), "utf8");
+    if (!routeHtml.includes(mainAnalytics)) {
+      throw new Error(`Could not find the main analytics configuration in ${route}/index.html`);
+    }
+    await writeFile(
+      new URL(`./dist/${route}/index.html`, import.meta.url),
+      routeHtml.replace(mainAnalytics, commercialAnalytics)
+    );
+  }
+}
+
+console.log(`${isCommercialBuild ? "COM" : "MAIN"} site built in dist/`);
