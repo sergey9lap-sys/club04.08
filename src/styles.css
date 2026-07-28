@@ -1257,3 +1257,150 @@ h2{font-size:clamp(38px,4.4vw,64px);line-height:1.08}
     width: 100%;
   }
 }
+
+/* Growth argument: structured corporate comparison and analysis board. */
+.solo__headline {
+  grid-template-columns: minmax(0, 1fr) 96px minmax(0, 1fr);
+  margin-top: 36px;
+  border: 1px solid var(--forest-line);
+  background: rgba(255, 255, 255, .015);
+}
+
+.solo__era {
+  min-height: 166px;
+  padding: 30px 34px;
+}
+
+.solo__era--before {
+  padding-right: 34px;
+}
+
+.solo__era--after {
+  padding-left: 34px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.solo__era h2,
+.solo__era--before h2 {
+  max-width: 500px;
+  margin-top: 18px;
+  font-family: Manrope, Arial, sans-serif;
+  font-size: clamp(28px, 2.35vw, 38px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -.025em;
+}
+
+.solo__story {
+  display: grid;
+  grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+  margin-top: 28px;
+  border: 1px solid var(--forest-line);
+  background: rgba(255, 255, 255, .012);
+}
+
+.solo__intro {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: none;
+  margin: 0;
+  padding: 42px 38px;
+  border: 0;
+  border-right: 1px solid var(--forest-line);
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+.solo__reasoning {
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  grid-template-columns: 1fr;
+  border: 0;
+}
+
+.solo__reason,
+.solo__reason--because {
+  min-height: 0;
+  padding: 27px 34px 30px;
+  background: transparent;
+}
+
+.solo__reason:first-child {
+  border-right: 0;
+  border-bottom: 1px solid var(--forest-line);
+}
+
+.solo__reason p,
+.solo__reason--because p {
+  margin-top: 18px;
+  font-family: Manrope, Arial, sans-serif;
+  font-size: clamp(18px, 1.55vw, 23px);
+  line-height: 1.45;
+}
+
+.solo__result {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 28px 38px;
+  border: 0;
+  border-top: 1px solid rgba(6, 28, 22, .22);
+  background: var(--gold);
+  color: var(--ink);
+  font-family: Manrope, Arial, sans-serif;
+  font-size: clamp(22px, 2vw, 30px) !important;
+  font-weight: 500;
+  line-height: 1.35 !important;
+}
+
+@media (max-width: 700px) {
+  .solo__headline {
+    grid-template-columns: 1fr;
+  }
+
+  .solo__era {
+    min-height: 0;
+    padding: 24px 20px;
+  }
+
+  .solo__era--before {
+    padding-right: 20px;
+  }
+
+  .solo__era--after {
+    padding: 24px 20px;
+  }
+
+  .solo__story {
+    grid-template-columns: 1fr;
+  }
+
+  .solo__intro,
+  .solo__reasoning,
+  .solo__result {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .solo__intro {
+    padding: 25px 20px;
+    border-right: 0;
+    border-bottom: 1px solid var(--forest-line);
+  }
+
+  .solo__reason,
+  .solo__reason--because {
+    padding: 24px 20px 26px;
+  }
+
+  .solo__reason p,
+  .solo__reason--because p {
+    margin-top: 16px;
+  }
+
+  .solo__result {
+    padding: 24px 20px;
+  }
+}
