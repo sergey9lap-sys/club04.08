@@ -51,10 +51,12 @@ if (!sourceHtml.includes(mainAnalytics)) {
   throw new Error("Could not find the main analytics configuration in index.html");
 }
 
-const commercialHtml = injectMetaPixel(sourceHtml
+const mainHtml = sourceHtml.replace(emptyReviewsPattern, reviewsHtml.trim());
+await writeFile(new URL("./dist/index.html", import.meta.url), mainHtml);
+
+const commercialHtml = injectMetaPixel(mainHtml
   .replace("<body>", '<body class="is-commercial">')
   .replace("/public/alexandra-hero-cutout.png", "/public/153.png")
-  .replace(emptyReviewsPattern, reviewsHtml.trim())
   .replace(mainWidget, commercialWidget)
   .replace(mainAnalytics, commercialAnalytics));
 
